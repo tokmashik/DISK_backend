@@ -6,10 +6,8 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_HOST=localhost
-      - POSTGRES_USER=DISK_back
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DATABASE=DISK_back
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: DISK_back
     command: postgres
     restart: always
 
@@ -18,4 +16,3 @@ services:
     container_name: redis-DISK_back
     ports:
       - "6379:6379"
-      

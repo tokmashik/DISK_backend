@@ -1,0 +1,20 @@
+version: '3'
+services:
+  postgresql:
+    image: postgres
+    container_name: DISK_back
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_HOST=localhost
+      - POSTGRES_USER=DISK_back
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DATABASE=DISK_back
+    command: postgres
+    restart: always
+
+  redis:
+    image: redis:alpine3.14
+    container_name: redis-DISK_back
+    ports:
+      - "6379:6379"

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {
   Body,
   Controller,
@@ -10,7 +11,6 @@ import { UserService } from './user.service';
 import { UpdateUserDTO } from './DTO';
 import { JwtAuthGuard } from 'src/guards/jwt-guards';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { request } from 'http';
 
 @Controller('users')
 export class UserController {
@@ -30,7 +30,7 @@ export class UserController {
 
   @UseGuards(JwtAuthGuard)
   @Delete()
-  deleteUser(@Req() request) {
+  deleteUser(@Req() request): Promise<boolean> {
     const user = request.user;
     return this.userService.deleteUser(user.email);
   }

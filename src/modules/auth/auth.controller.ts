@@ -1,10 +1,11 @@
+/* eslint-disable prettier/prettier */
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDTO } from '../user/DTO';
 import { UserLoginDTO } from './dto';
 import { AuthUserResponse } from './response';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/guards/jwt-guards';
+/*import { JwtAuthGuard } from 'src/guards/jwt-guards';*/
 
 @Controller('auth')
 export class AuthController {
@@ -24,9 +25,9 @@ export class AuthController {
     return this.authService.loginUser(dto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  /*@UseGuards(JwtAuthGuard)
   @Post('test')
   test() {
     return true;
-  }
+  }*/
 }

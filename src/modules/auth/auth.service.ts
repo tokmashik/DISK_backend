@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import { CreateUserDTO } from '../user/DTO';
@@ -15,27 +16,30 @@ export class AuthService {
   ) {}
 
   async registerUsers(dto: CreateUserDTO): Promise<CreateUserDTO> {
-    const existUser = await this.userService.findUserByEmail(dto.email); // Существ ли в бд польз с данным email
-    if (existUser) throw new BadRequestException(AppError.USER_EXIST);
-    return this.userService.createUser(dto);
+    try {
+      const existUser = await this.userService.findUserByEmail(dto.email); // Существ ли в бд польз с данным email
+      if (existUser) throw new BadRequestException(AppError.USER_EXIST);
+      return this.userService.createUser(dto);
+    } catch (e) {
+      throw new Error(e);
+    }
   }
 
   async loginUser(dto: UserLoginDTO): Promise<AuthUserResponse> {
-    const existUser = await this.userService.findUserByEmail(dto.email); // Поиск в бд по email
-    if (!existUser) throw new BadRequestException(AppError.USER_NOT_EXIST);
-    const validatePassword = await bcrypt.compare(
-      dto.password,
-      existUser.password,
-    );
-    if (!validatePassword) throw new BadRequestException(AppError.WRONG_DATA);
-
-    const userData = {
-      name: existUser.firstName,
-      email: existUser.email,
-    };
-    const token = await this.tokenService.generateJwtToken(userData);
-    const user = await this.userService.publicUser(dto.email);
-    return { ...user, token };
+    try {
+      const existUser = await this.userService.findUserByEmail(dto.email); // Поиск в бд по email
+      if (!existUser) throw new BadRequestException(AppError.USER_NOT_EXIST);
+      const validatePassword = await bcrypt.compare(
+        dto.password,
+        existUser.password,
+      );
+      if (!validatePassword) throw new BadRequestException(AppError.WRONG_DATA);
+      const user = await this.userService.publicUser(dto.email);
+      const token = await this.tokenService.generateJwtToken(user);
+      return { user, token };
+    } catch (e) {
+      throw new Error(e);
+    }
   }
 }
 

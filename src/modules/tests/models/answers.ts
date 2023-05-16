@@ -7,7 +7,7 @@ export class Answers extends Model {
 
   @ForeignKey(() => Questions)
   @Column
-  questionId: number;
+  questionsId: number;
 
   @Column
   text: string;

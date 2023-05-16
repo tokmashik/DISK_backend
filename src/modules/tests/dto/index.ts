@@ -47,6 +47,9 @@ export class QuestionsDTO {
   @IsString()
   text: string;
 
+  @IsString()
+  answers: string;
+
   @IsNumber()
   order: number;
 }
@@ -58,6 +61,6 @@ export class AnswersDTO {
   @IsString()
   text: string;
 
-  @IsString()
-  order: string;
+  @IsNumber()
+  order: number;
 }

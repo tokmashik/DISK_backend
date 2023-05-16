@@ -17,14 +17,6 @@ export class TestsService {
     return this.testsModel.findAll({ include: ['questions'] });
   }
 
-  async getOneTest(id): Promise<Tests> {
-    try {
-      return this.testsModel.findByPk(id);
-    } catch (e) {
-      throw new Error(e);
-    }
-  }
-
   /*public async getOne({ where }) {
     return this.testsModel.findAll({ include: ['questions'] });
   }*/
@@ -41,9 +33,21 @@ export class TestsService {
   }
 
   async findOneTest(id): Promise<Tests> {
-    return await this.testsModel.findOne({
-      where: { id },
-    });
+    try {
+      return await this.testsModel.findOne({
+        where: { id },
+      });
+    } catch (e) {
+      throw new Error(e);
+    }
+  }
+
+  async deleteOneTest(id) {
+    try {
+      return await this.testsModel.destroy({ where: { id } });
+    } catch (e) {
+      throw new Error(e);
+    }
   }
 
   //include[{ model: Questions }]

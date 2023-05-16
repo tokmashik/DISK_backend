@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Delete, Req, Body, Param, NotFoundException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Delete,
+  Body,
+  Param,
+  NotFoundException,
+} from '@nestjs/common';
 import { TestsService } from './tests.service';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateTestsDTO } from './dto';
@@ -23,13 +31,6 @@ export class TestsController {
     return test;
   }
 
-  /*@Delete('id')
-  async deleteTest(@Req() request) {
-    const test = request.test;
-    return this.testsService.deleteTest();
-  }
-*/
-
   @ApiTags('API')
   @ApiResponse({ status: 201 })
   @Post('add')
@@ -37,16 +38,12 @@ export class TestsController {
     return this.testsService.createTests(dto);
   }
 
-  /*@Post()
-  async addTest(
-  ) {
-    return this.testsService.addTest();
+  @Delete(':id')
+  async remove(@Param('id') id: number) {
+    const deleted = await this.testsService.deleteOneTest(id);
+    if (deleted === 0) {
+      throw new NotFoundException("This Post doesn't exist");
+    }
+    return 'Successfully deleted';
   }
-
-  @ApiTags('API')
-  @ApiResponse({ status: 201 })
-  @Post()
-  async addTest(@Body() testsDTO: CreateTestsDTO) {
-    return this.testsService.addTest();
-  }*/
 }

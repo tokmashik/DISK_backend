@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { IsString } from 'class-validator';
-import { Column, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
+import { Column, DataType, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
 import { User } from 'src/modules/user/models/user.model';
 
 @Table
@@ -8,11 +7,15 @@ export class Sessions extends Model {
   @ForeignKey(() => User)
   user: User;
 
-  @Column
-  name: string;
- /* @IsString()
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
   dateBeg: string;
 
-  @Column
-  dateEnd: number;*/
+  @Column({
+    type: DataType.TEXT,
+    allowNull: false,
+  })
+  dateEnd: string;
 }

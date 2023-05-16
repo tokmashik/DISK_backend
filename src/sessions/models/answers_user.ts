@@ -9,7 +9,7 @@ export class Answers_user extends Model {
   sessionId: number;
 
   @Column
-  text_of_guestion: string;
+  text_of_question: string;
 
   @Column
   text_of_answers: string;

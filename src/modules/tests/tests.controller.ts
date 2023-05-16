@@ -6,11 +6,13 @@ import {
   Body,
   Param,
   NotFoundException,
+  Put,
 } from '@nestjs/common';
 import { TestsService } from './tests.service';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreateTestsDTO } from './dto';
+import { CreateTestsDTO, QuestionsDTO } from './dto';
 import { Tests } from './models/tests';
+import { Questions } from './models/questions';
 
 @Controller('tests')
 export class TestsController {
@@ -31,11 +33,22 @@ export class TestsController {
     return test;
   }
 
-  @ApiTags('API')
-  @ApiResponse({ status: 201 })
   @Post('add')
-  createTests(@Body() dto: CreateTestsDTO): Promise<CreateTestsDTO> {
+  createTests(@Body() dto: CreateTestsDTO): Promise<Tests> {
     return this.testsService.createTests(dto);
+  }
+
+  @Put(':id')
+  async update(
+    @Param('id') id: number,
+    @Body() post: CreateTestsDTO,
+  ): Promise<Tests> {
+    const { numberOfAffectedRows, updatedTest } =
+      await this.testsService.updateOneTest(id, post);
+    if (numberOfAffectedRows === 0) {
+      throw new NotFoundException("This Post doesn't exist");
+    }
+    return updatedTest;
   }
 
   @Delete(':id')
@@ -45,5 +58,10 @@ export class TestsController {
       throw new NotFoundException("This Post doesn't exist");
     }
     return 'Successfully deleted';
+  }
+
+  @Post(':id/question')
+  createQuestion(@Body() dto: QuestionsDTO): Promise<Questions> {
+    return this.testsService.createQuestion(dto);
   }
 }

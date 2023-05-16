@@ -3,7 +3,6 @@ import { IsBoolean, IsNumber, IsString } from 'class-validator';
 import { Tests } from '../models/tests';
 
 export class CreateTestsDTO {
-
   @IsString()
   name: string;
 
@@ -43,10 +42,7 @@ export class TestsResponseDTO {
 
 export class QuestionsDTO {
   @IsNumber()
-  id: number;
-
-  @IsString()
-  questionsId: number;
+  testId: number;
 
   @IsString()
   text: string;
@@ -57,9 +53,6 @@ export class QuestionsDTO {
 
 export class AnswersDTO {
   @IsNumber()
-  id: number;
-
-  @IsString()
   questionsId: number;
 
   @IsString()

@@ -9,12 +9,12 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from 'src/modules/user/models/user.model';
 import { AuthModule } from '../auth/auth.module';
 import { TokenModule } from 'src/token/token.module';
-import { AnswersModule } from '../answers/answers.module';
-import { QuestionsModule } from '../questions/questions.module';
 import { TestsModule } from '../tests/tests.module';
-import { Answers } from '../answers/models/answers';
-import { Questions } from '../questions/models/questions';
 import { Tests } from '../tests/models/tests';
+import { Questions } from '../tests/models/questions';
+import { Answers } from '../tests/models/answers';
+import { Sessions } from 'src/sessions/models/sessions';
+import { SessionsModule } from 'src/sessions/sessions.module';
 
 @Module({
   imports: [
@@ -34,15 +34,14 @@ import { Tests } from '../tests/models/tests';
         database: configService.get('db_name'),
         synchronize: true,
         autoLoadModels: true,
-        models: [User, Answers, Questions, Tests],
+        models: [User, Tests, Questions, Answers, Sessions],
       }),
     }),
     UserModule,
     AuthModule,
     TokenModule,
-    AnswersModule,
-    QuestionsModule,
-    TestsModule
+    TestsModule,
+    SessionsModule
   ],
   controllers: [AppController],
   providers: [AppService],

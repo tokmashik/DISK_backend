@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { Column, Model, Table } from 'sequelize-typescript';
+import { Column, HasMany, Model, Table } from 'sequelize-typescript';
+import { Sessions } from 'src/sessions/models/sessions';
 
 @Table
 export class User extends Model {
@@ -17,4 +18,10 @@ export class User extends Model {
   
   @Column
   password: string
+
+  @HasMany(() => Sessions, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  sessions: Sessions[]
 }

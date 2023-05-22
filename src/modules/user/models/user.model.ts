@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Column, HasMany, Model, Table } from 'sequelize-typescript';
-import { Sessions } from 'src/sessions/models/sessions';
+import { Sessions } from 'src/modules/sessions/models/sessions';
 
 @Table
 export class User extends Model {

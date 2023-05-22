@@ -7,10 +7,18 @@ import { Questions } from 'src/modules/tests/models/questions';
 import { Answers } from 'src/modules/tests/models/answers';
 import { User } from 'src/modules/user/models/user.model';
 import { Sessions } from './models/sessions';
+import { Answers_user } from './models/answers_user';
 
 @Module({
   imports: [
-    SequelizeModule.forFeature([Tests, Questions, Answers, User, Sessions]),
+    SequelizeModule.forFeature([
+      Tests,
+      Questions,
+      Answers,
+      User,
+      Sessions,
+      Answers_user,
+    ]),
   ],
   controllers: [SessionsController],
   providers: [SessionsService],

@@ -8,6 +8,4 @@ export default () => ({
   db_host: process.env.DB_HOST,
   secret_jwt: process.env.SECRET,
   expire_jwt: process.env.EXPIRE_JWT,
-  jwt_access: process.env.JWT_ACCESS_TOKEN,
-  jwt_refresh: process.env.JWT_REFRESH_TOKEN,
 });

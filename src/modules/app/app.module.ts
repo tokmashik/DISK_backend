@@ -13,8 +13,9 @@ import { TestsModule } from '../tests/tests.module';
 import { Tests } from '../tests/models/tests';
 import { Questions } from '../tests/models/questions';
 import { Answers } from '../tests/models/answers';
-import { Sessions } from 'src/sessions/models/sessions';
-import { SessionsModule } from 'src/sessions/sessions.module';
+import { Sessions } from '../sessions/models/sessions';
+import { SessionsModule } from '../sessions/sessions.module';
+
 
 @Module({
   imports: [

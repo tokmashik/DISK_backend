@@ -36,11 +36,11 @@ export class TestsService {
     }
   }
 
-  //include[{ model: Questions }]
   async findOneTest(id): Promise<Tests> {
     try {
       return await this.testsModel.findOne({
         where: { id },
+        //include: ['questions', 'answers'],
         include: ['questions'],
       });
     } catch (e) {
@@ -75,9 +75,13 @@ export class TestsService {
     }
   }
 
-  async findOneQuestion(id): Promise<Tests> {
+  async getAllQuestions() {
+    return this.questionModel.findAll({ include: ['answers'] });
+  }
+
+  async findOneQuestion(id): Promise<Questions> {
     try {
-      return await this.testsModel.findOne({
+      return await this.questionModel.findOne({
         where: { id },
         include: ['answers'],
       });
@@ -105,6 +109,16 @@ export class TestsService {
     }
   }
 
+  async findOneAnswer(id): Promise<Answers> {
+    try {
+      return await this.answersModel.findOne({
+        where: { id },
+      });
+    } catch (e) {
+      throw new Error(e);
+    }
+  }
+
   async deleteOneAnswers(id) {
     try {
       return await this.answersModel.destroy({ where: { id } });
@@ -112,13 +126,4 @@ export class TestsService {
       throw new Error(e);
     }
   }
-
-  /*const question1 = await this.questionModel.create({
-      text: 'test Question',
-      testId: test.id,
-    });
-    const question2 = await this.questionModel.create({
-      text: 'test Question 2',
-      testId: test.id,
-    });*/
 }

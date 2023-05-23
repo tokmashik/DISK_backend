@@ -10,10 +10,11 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { SessionsService } from './sessions.service';
-import { CreateSessionsDTO } from './dto';
+import { Answers_userDTO, CreateSessionsDTO } from './dto';
 import { Sessions } from './models/sessions';
 import { JwtAuthGuard } from 'src/guards/jwt-guards';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Answers_user } from './models/answers_user';
 
 @Controller('sessions')
 export class SessionsController {
@@ -60,5 +61,13 @@ export class SessionsController {
       throw new NotFoundException("This session doesn't exist");
     }
     return 'Successfully deleted';
+  }
+
+  @ApiTags('API')
+  @ApiResponse({ status: 201, type: Answers_userDTO })
+  //@UseGuards(JwtAuthGuard)
+  @Post('answers_user/:id')
+  createQuestion(@Body() dto: Answers_userDTO): Promise<Answers_user> {
+    return this.sessionsService.createAnswers_user(dto);
   }
 }

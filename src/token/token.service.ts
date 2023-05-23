@@ -18,4 +18,6 @@ export class TokenService {
       expiresIn: this.configService.get('expire_jwt'),
     });
   }
+
+  
 }

@@ -15,6 +15,7 @@ import { Questions } from '../tests/models/questions';
 import { Answers } from '../tests/models/answers';
 import { Sessions } from '../sessions/models/sessions';
 import { SessionsModule } from '../sessions/sessions.module';
+import { Answers_user } from '../sessions/models/answers_user';
 
 
 @Module({
@@ -35,7 +36,7 @@ import { SessionsModule } from '../sessions/sessions.module';
         database: configService.get('db_name'),
         synchronize: true,
         autoLoadModels: true,
-        models: [User, Tests, Questions, Answers, Sessions],
+        models: [User, Tests, Questions, Answers, Sessions, Answers_user],
       }),
     }),
     UserModule,

@@ -25,7 +25,7 @@ export class UserController {
     @Req() request,
   ): Promise<UpdateUserDTO> {
     const user = request.user;
-    this.jwtService.sign({ userId: user._id });
+    /*this.jwtService.sign({ userId: user._id });*/
     return this.userService.updateUser(user.email, updateDTO);
   }
 

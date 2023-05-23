@@ -8,17 +8,16 @@ export class Sessions extends Model {
   @ForeignKey(() => User)
   user: User;
 
-  /*@HasMany(() => Answers_user)
-  answers_user: Answers_user[];*/
+  @HasMany(() => Answers_user)
+  answers_user: Answers_user[];
 
   @Column({
     type: DataType.DATE, //DATE
-    allowNull: false,
   })
   dateBeg: string;
 
   @Column({
-    type: DataType.STRING, //DATE
+    type: DataType.DATE, //DATE
     allowNull: false,
   })
   dateEnd: string;

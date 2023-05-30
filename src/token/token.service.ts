@@ -17,7 +17,5 @@ export class TokenService {
       secret: this.configService.get('secret_jwt'), // Подпись токена
       expiresIn: this.configService.get('expire_jwt'),
     });
-  }
-
-  
+  } 
 }

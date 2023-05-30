@@ -47,7 +47,7 @@ export class TestsController {
 
   @ApiTags('API')
   @ApiResponse({ status: 201, type: TestsResponseDTO })
-  //@UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Post('add')
   createTests(@Body() dto: CreateTestsDTO): Promise<Tests> {
     return this.testsService.createTests(dto);

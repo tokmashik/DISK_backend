@@ -3,12 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { Tests } from './models/tests';
 import { Questions } from './models/questions';
 import { Answers } from './models/answers';
-import {
-  AnswersDTO,
-  CreateTestsDTO,
-  QuestionsDTO,
-  TestsResponseDTO,
-} from './dto';
+import { AnswersDTO, CreateTestsDTO, QuestionsDTO } from './dto';
 
 @Injectable()
 export class TestsService {

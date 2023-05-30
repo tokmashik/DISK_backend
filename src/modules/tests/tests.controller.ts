@@ -7,7 +7,6 @@ import {
   Param,
   NotFoundException,
   Put,
-  UseGuards,
 } from '@nestjs/common';
 import { TestsService } from './tests.service';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -20,7 +19,6 @@ import {
 import { Tests } from './models/tests';
 import { Questions } from './models/questions';
 import { Answers } from './models/answers';
-import { JwtAuthGuard } from 'src/guards/jwt-guards';
 
 @Controller('tests')
 export class TestsController {
@@ -47,7 +45,7 @@ export class TestsController {
 
   @ApiTags('API')
   @ApiResponse({ status: 201, type: TestsResponseDTO })
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   @Post('add')
   createTests(@Body() dto: CreateTestsDTO): Promise<Tests> {
     return this.testsService.createTests(dto);
